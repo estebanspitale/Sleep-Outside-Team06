@@ -14,6 +14,7 @@ function addProductToCart(product) {
   } else {
     // if the product is not in the cart, add it
     product.Quantity = 1;
+    // set the product to be a cart item
     items.push(product);
   }
   setLocalStorage("so-cart", items);
