@@ -72,4 +72,4 @@ function clearCart() {
   // Optionally, refresh the UI after clearing
   renderCartContents();
 }
-document.getElementById("clearCartBtn").addEventListener("click, clearCart");
+document.getElementById("clearCartBtn").addEventListener("click", clearCart);
