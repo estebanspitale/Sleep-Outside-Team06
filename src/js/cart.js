@@ -1,9 +1,19 @@
-import { getLocalStorage, qs } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, qs } from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  const productList = document.querySelector(".product-list");
+  productList.innerHTML = htmlItems.join("");
+
+  // Add event listeners to remove cart items
+  // This will add a click event listener to each remove-item span
+  document.querySelectorAll('.remove-item').forEach(span => {
+    span.addEventListener('click', function() {
+      const id = this.dataset.id;
+      removeProductFromCart(id);
+    });
+  });
 
   // Handle cart total display
   const cartFooter = qs(".cart-footer");
@@ -38,7 +48,7 @@ function cartItemTemplate(item) {
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: ${item.Quantity}</p>
+  <p class="cart-card__quantity">qty: ${item.Quantity} <span class="remove-item" data-id="${item.Id}">X</span></p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
 </li>`;
 
@@ -73,3 +83,11 @@ function clearCart() {
   renderCartContents();
 }
 document.getElementById("clearCartBtn").addEventListener("click", clearCart);
+
+// Function to remove a product from the cart
+function removeProductFromCart(productId) {
+  const cartItems = getLocalStorage("so-cart") || [];
+  const updatedCart = cartItems.filter(item => item.Id !== productId);
+  setLocalStorage("so-cart", updatedCart);
+  renderCartContents();
+}
