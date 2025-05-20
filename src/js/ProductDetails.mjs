@@ -21,10 +21,20 @@ export default class ProductDetails {
   }
 
   addProductToCart() {
-    const cartItems = getLocalStorage("so-cart") || [];
-    cartItems.push(this.product);
-    setLocalStorage("so-cart", cartItems);
+  const cartItems = getLocalStorage("so-cart") || [];
+  const productIndex = cartItems.findIndex(item => item.Id === this.product.Id);
+
+  if (productIndex > -1) {
+    // Product already in cart, increment quantity
+    cartItems[productIndex].Quantity = (cartItems[productIndex].Quantity || 1) + 1;
+  } else {
+    // Add new product with quantity 1
+    const productToAdd = { ...this.product, Quantity: 1 };
+    cartItems.push(productToAdd);
   }
+
+  setLocalStorage("so-cart", cartItems);
+}
 
   renderProductDetails() {
     productDetailsTemplate(this.product);
