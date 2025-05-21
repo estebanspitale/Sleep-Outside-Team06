@@ -66,8 +66,8 @@ function productDetailsTemplate(product) {
     sugestedRetailPrice.classList.add('product-card__old-price');
     sugestedRetailPrice.innerHTML = `<small>from:<s>$${product.SuggestedRetailPrice}</s></small>`;
     // Insert the new paragraph before the product price
-    // Use parent.document.getElementById('productPrice') to ensure the correct context
-    productDetails.insertBefore(sugestedRetailPrice, parent.document.getElementById('productPrice'));
+    // Use document.getElementById('productPrice') to ensure the correct context
+    productDetails.insertBefore(sugestedRetailPrice, document.getElementById('productPrice'));
     document.getElementById('productPrice').innerHTML = `$${product.FinalPrice} <span class="discount-badge">-${discountPercent}% OFF</span>`;
   } else {
     document.getElementById('productPrice').textContent = product.FinalPrice;
