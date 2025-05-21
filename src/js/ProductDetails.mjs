@@ -50,9 +50,26 @@ function productDetailsTemplate(product) {
   productImage.src = product.Image;
   productImage.alt = product.NameWithoutBrand;
 
-  document.getElementById('productPrice').textContent = product.FinalPrice;
   document.getElementById('productColor').textContent = product.Colors[0].ColorName;
   document.getElementById('productDesc').innerHTML = product.DescriptionHtmlSimple;
 
   document.getElementById('addToCart').dataset.id = product.Id;
+
+  // Discount indicator
+  // Verify if the product is discounted
+  if (product.FinalPrice < product.SuggestedRetailPrice) {
+    // If the product is discounted, calculate the discount percentage
+    const discountPercent = Math.round(((product.SuggestedRetailPrice - product.FinalPrice) / product.SuggestedRetailPrice) * 100);
+    const productDetails = document.querySelector('.product-detail');
+    // Create a new paragraph element for the old price
+    const sugestedRetailPrice = document.createElement('p');
+    sugestedRetailPrice.classList.add('product-card__old-price');
+    sugestedRetailPrice.innerHTML = `<small>from:<s>$${product.SuggestedRetailPrice}</s></small>`;
+    // Insert the new paragraph before the product price
+    // Use document.getElementById('productPrice') to ensure the correct context
+    productDetails.insertBefore(sugestedRetailPrice, document.getElementById('productPrice'));
+    document.getElementById('productPrice').innerHTML = `$${product.FinalPrice} <span class="discount-badge">-${discountPercent}% OFF</span>`;
+  } else {
+    document.getElementById('productPrice').textContent = product.FinalPrice;
+  }
 }
