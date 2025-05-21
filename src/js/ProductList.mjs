@@ -42,7 +42,7 @@ export default class ProductList {
   renderList(list) {
     // Filter out specific products by their Id
     // This filtering logic meets the requirement of not showing specific products by now
-    // Most lilkely, this will be refactored in the future when we can show all products
+    // Most likely, this will be refactored in the future when we can show all products
     const filteredList = list.filter(product => product.Id !== "989CG" && product.Id !== "880RT");
     // apply use new utility function instead of the commented code above
     renderListWithTemplate(productCardTemplate, this.listElement, filteredList);
