@@ -1,6 +1,18 @@
-import { getLocalStorage, setLocalStorage, qs } from "./utils.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
+import ShoppingCart from "./ShoppingCart.mjs";
 
-function renderCartContents() {
+// Load header and footer
+loadHeaderFooter();
+
+// Declare the cart variable
+// This will be used to manage the shopping cart
+const cart = new ShoppingCart();
+
+// Initialize the shopping cart
+cart.init();
+
+
+/*function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   const productList = document.querySelector(".product-list");
@@ -57,26 +69,6 @@ function cartItemTemplate(item) {
 
 renderCartContents();
 
-/*document.addEventListener('DOMContentLoaded', () => {
-  const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-  const cartFooter = document.querySelector('.cart-footer');
-  const cartTotalElement = document.querySelector('.cart-total');
-
-  if (cartItems.length > 0) {
-    cartFooter.classList.remove('hide');
-
-    // Assuming each item has a `price` and `quantity` property
-    const total = cartItems.reduce((sum, item) => {
-      return sum + (item.price * item.quantity);
-    }, 0);
-
-    // Format to 2 decimal places
-    cartTotalElement.textContent = `Total: $${total.toFixed(2)}`;
-  } else {
-    cartFooter.classList.add('hide'); // just in case it's showing
-  }
-});*/
-
 function clearCart() {
   localStorage.removeItem("so-cart");
   // Optionally, refresh the UI after clearing
@@ -90,4 +82,4 @@ function removeProductFromCart(productId) {
   const updatedCart = cartItems.filter(item => item.Id !== productId);
   setLocalStorage("so-cart", updatedCart);
   renderCartContents();
-}
+}*/
