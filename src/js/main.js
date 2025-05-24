@@ -2,6 +2,13 @@ import ProductData from "./ProductData.mjs";
 import ProductList from "./ProductList.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
 
+import Alert from './alert.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+  const alertSystem = new Alert();
+  alertSystem.showAlerts();
+});
+
 loadHeaderFooter();
 
 const dataSource = new ProductData("tents");
