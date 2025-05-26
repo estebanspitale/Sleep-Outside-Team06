@@ -6,15 +6,19 @@ function productCardTemplate(product) {
   // Calculate the discount percentage
   // Use Math.round to round the discount percentage to the nearest integer
   const discountPercent = isDiscounted
-    ? Math.round(((product.SuggestedRetailPrice - product.FinalPrice) / product.SuggestedRetailPrice) * 100)
+    ? Math.round(
+        ((product.SuggestedRetailPrice - product.FinalPrice) /
+          product.SuggestedRetailPrice) *
+          100,
+      )
     : 0;
 
   // Return the HTML string for the product card
   // Use template literals for better readability
   return `
     <li class="product-card">
-      <a href="product_pages/?product=${product.Id}">
-        <img src="${product.Image}" alt="${product.Name}">
+      <a href="/product_pages/?product=${product.Id}">
+        <img src="${product.Images.PrimaryMedium}" alt="${product.Name}">
         <h3>${product.Brand.Name}</h3>
         <h2>${product.Name}</h2>
         ${isDiscounted ? `<p class="product-card__old-price"><small>from:<s>$${product.SuggestedRetailPrice}</s></small></p>` : ""}
@@ -35,16 +39,19 @@ export default class ProductList {
   }
 
   async init() {
-    const list = await this.dataSource.getData();
+    const list = await this.dataSource.getData(this.category);
     this.renderList(list);
+    document.querySelector(".title").textContent = this.category;
   }
 
   renderList(list) {
-    // Filter out specific products by their Id
-    // This filtering logic meets the requirement of not showing specific products by now
-    // Most likely, this will be refactored in the future when we can show all products
-    const filteredList = list.filter(product => product.Id !== "989CG" && product.Id !== "880RT");
+    // // Filter out specific products by their Id
+    // // This filtering logic meets the requirement of not showing specific products by now
+    // // Most likely, this will be refactored in the future when we can show all products
+    // const filteredList = list.filter(
+    //   (product) => product.Id !== "989CG" && product.Id !== "880RT",
+    // );
     // apply use new utility function instead of the commented code above
-    renderListWithTemplate(productCardTemplate, this.listElement, filteredList);
+    renderListWithTemplate(productCardTemplate, this.listElement, list);
   }
 }

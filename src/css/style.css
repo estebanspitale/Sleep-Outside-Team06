@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square > div {
+.logo--square>div {
   margin-top: -1.7em;
 }
 
@@ -241,8 +241,8 @@ button {
 }
 
 .remove-item {
-  cursor:pointer;
-  color:red;
+  cursor: pointer;
+  color: red;
   font-weight: bold;
 }
 
@@ -254,6 +254,7 @@ button {
   font-size: 0.8em;
   margin-left: 8px;
 }
+
 .product-card__old-price {
   color: #888;
   font-size: 0.9em;
@@ -265,6 +266,24 @@ button {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.product-grid {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.product-grid li h2 {
+  font-size: 100%;
+}
+
+.product-grid a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (min-width: 500px) {
