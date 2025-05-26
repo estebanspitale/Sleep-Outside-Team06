@@ -207,7 +207,6 @@ button {
   display: grid;
   grid-template-columns: 25% auto 15%;
   font-size: var(--small-font);
-  /* max-height: 120px; */
   align-items: center;
 }
 
@@ -265,6 +264,34 @@ button {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.categories {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  margin: 20px 0;
+}
+.categories a {
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+}
+.categories img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+.categories img:hover {
+  transform: scale(1.05);
+}
+.categories span {
+  display: block;
+  margin-top: 0.5rem;
+  font-weight: bold;
 }
 
 @media screen and (min-width: 500px) {
