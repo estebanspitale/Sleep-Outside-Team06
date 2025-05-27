@@ -66,3 +66,17 @@ export async function loadHeaderFooter() {
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
 }
+
+export function updateCartCount() {
+  const cartItems = getLocalStorage("so-cart") || [];
+  // Soma todas as quantidades dos itens
+  const totalQty = cartItems.reduce((sum, item) => sum + (Number(item.Quantity) || 1), 0);
+  const cartCount = document.getElementById("cart-count");
+  if (totalQty > 0) {
+    cartCount.textContent = totalQty;
+    cartCount.classList.add("cart-count");
+  } else {
+    cartCount.textContent = "";
+    cartCount.classList.remove("cart-count");
+  }
+}
