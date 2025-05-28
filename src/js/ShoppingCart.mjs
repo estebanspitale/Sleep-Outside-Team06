@@ -23,14 +23,69 @@ function cartItemTemplate(item) {
 }
 
 export default class ShoppingCart {
-    constructor() {
-        this.cartItems = [];
-        this.cartFooter = null;
-        this.cartTotalElement = null;
-        this.clearCartBtn = null;
+  constructor() {
+    this.cartItems = [];
+    this.cartFooter = null;
+    this.cartTotalElement = null;
+    this.clearCartBtn = null;
+  }
+
+  async init() {
+    this.cartItems = getLocalStorage("so-cart") || [];
+    this.cartFooter = qs(".cart-footer");
+    this.cartTotalElement = qs(".cart-total");
+    this.clearCartBtn = document.getElementById("clearCartBtn");
+
+    if (this.clearCartBtn) {
+      this.clearCartBtn.addEventListener("click", () => {
+        this.clearCart();
+      });
     }
 
-    async init() {
+    // Render the cart contents
+    this.renderCartContents();
+  }
+
+  renderCartContents() {
+    const productList = document.querySelector(".product-list");
+
+    if (!productList) return;
+
+    // Si el carrito está vacío
+    if (this.cartItems.length === 0) {
+      productList.innerHTML = '<p>Tu carrito está vacío.</p>';
+      this.cartFooter?.classList.add("hide");
+      if (this.clearCartBtn) this.clearCartBtn.style.display = "none";
+      return;
+    }
+
+    // Si hay productos
+    const htmlItems = this.cartItems.map((item) => cartItemTemplate(item));
+    productList.innerHTML = htmlItems.join("");
+
+    // Botón de eliminar producto
+    document.querySelectorAll(".remove-item").forEach((span) => {
+      span.addEventListener("click", () => {
+        const id = span.dataset.id;
+        this.removeProductFromCart(id);
+      });
+    });
+
+    // Mostrar total y footer
+    this.cartFooter?.classList.remove("hide");
+
+    const total = this.cartItems.reduce((sum, item) => {
+      const price = Number(item.FinalPrice) || 0;
+      const qty = Number(item.Quantity) || 0;
+      return sum + price * qty;
+    }, 0);
+
+    if (this.cartTotalElement) {
+      this.cartTotalElement.textContent = `Total: $${total.toFixed(2)}`;
+    }
+  }
+
+    /*async init() {
         this.cartItems = getLocalStorage("so-cart") || [];
         this.cartFooter = qs(".cart-footer");
         this.cartTotalElement = qs(".cart-total");
@@ -89,7 +144,7 @@ export default class ShoppingCart {
           this.clearCartBtn.style.display = "none";
         }
         
-    }
+    }*/
 
     clearCart() {
         localStorage.removeItem("so-cart");
