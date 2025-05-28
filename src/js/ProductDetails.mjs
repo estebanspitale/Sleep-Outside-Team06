@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, updateCartCount } from "./utils.mjs";
 
 export default class ProductDetails {
 
@@ -21,19 +21,20 @@ export default class ProductDetails {
   }
 
   addProductToCart() {
-  const cartItems = getLocalStorage("so-cart") || [];
-  const productIndex = cartItems.findIndex(item => item.Id === this.product.Id);
+    const cartItems = getLocalStorage("so-cart") || [];
+    const productIndex = cartItems.findIndex(item => item.Id === this.product.Id);
 
-  if (productIndex > -1) {
-    // Product already in cart, increment quantity
-    cartItems[productIndex].Quantity = (cartItems[productIndex].Quantity || 1) + 1;
-  } else {
-    // Add new product with quantity 1
-    const productToAdd = { ...this.product, Quantity: 1 };
-    cartItems.push(productToAdd);
-  }
+    if (productIndex > -1) {
+      // Product already in cart, increment quantity
+      cartItems[productIndex].Quantity = (cartItems[productIndex].Quantity || 1) + 1;
+    } else {
+      // Add new product with quantity 1
+      const productToAdd = { ...this.product, Quantity: 1 };
+      cartItems.push(productToAdd);
+    }
 
-  setLocalStorage("so-cart", cartItems);
+    setLocalStorage("so-cart", cartItems);
+    updateCartCount();
 }
 
   renderProductDetails() {

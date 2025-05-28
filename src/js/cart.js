@@ -1,8 +1,10 @@
-import { loadHeaderFooter } from "./utils.mjs";
+import { loadHeaderFooter, updateCartCount } from "./utils.mjs";
 import ShoppingCart from "./ShoppingCart.mjs";
 
 // Load header and footer
-loadHeaderFooter();
+loadHeaderFooter().then(() => {
+  updateCartCount();
+});
 
 // Declare the cart variable
 // This will be used to manage the shopping cart
