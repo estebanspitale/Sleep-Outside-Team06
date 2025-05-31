@@ -1,4 +1,4 @@
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import ProductList from "./ProductList.mjs";
 import { loadHeaderFooter, getParam, updateCartCount } from "./utils.mjs";
 
@@ -7,7 +7,7 @@ loadHeaderFooter().then(() => {
 });
 
 const category = getParam("category");
-const dataSource = new ProductData();
+const dataSource = new ExternalServices();
 const element = document.querySelector(".product-list");
 const productList = new ProductList(category, dataSource, element);
 

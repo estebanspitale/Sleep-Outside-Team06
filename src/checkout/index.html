@@ -1,14 +1,11 @@
 <!doctype html>
-
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Sleep Outside | Checkout</title>
-
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/checkout.js" type="module"></script>
   </head>
 
   <body>
@@ -20,9 +17,76 @@
       <section class="products">
         <h2>Review & Place your Order</h2>
       </section>
+      <section class="checkout">
+        <div class="order-summary">
+          <h3>Order Summary</h3>
+          <div class="order-summary__row">
+            <span>Subtotal:</span>
+            <span id="order-subtotal">$0.00</span>
+          </div>
+          <div class="order-summary__row">
+            <span>Tax:</span>
+            <span id="order-tax">$0.00</span>
+          </div>
+          <div class="order-summary__row">
+            <span>Shipping Estimate:</span>
+            <span id="order-shipping">$0.00</span>
+          </div>
+          <div class="order-summary__row order-summary__total">
+            <span><strong>Order Total:</strong></span>
+            <span id="order-total"><strong>$0.00</strong></span>
+          </div>
+        </div>
+        <form id="checkoutForm">
+          <fieldset class="form-group fieldset-custom">
+            <legend>Personal Information</legend>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="fname" required />
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lname" required />
+          </fieldset>
+
+          <fieldset class="form-group fieldset-custom">
+            <legend>Shipping & Billing Address</legend>
+            <label for="streetAddress">Street Address:</label>
+            <input type="text" id="streetAddress" name="street" required />
+            <div class="form-group address-extra">
+              <div>
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city" required />
+              </div>
+              <div>
+                <label for="state">State:</label>
+                <input type="text" id="state" name="state" required />
+              </div>
+              <div>
+                <label for="zip">Zip Code:</label>
+                <input type="text" id="zip" name="zip" required />
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-group fieldset-custom">
+            <legend>Payment Information</legend>
+            <label for="creditCard">Credit Card Number:</label>
+            <input type="text" id="creditCard" name="cardNumber" required />
+            <div class="form-group card-extra">
+              <div>
+                <label for="expiration">Expiration Date:</label>
+                <input type="text" id="expiration" name="expiration" placeholder="MM/YY" required />
+              </div>
+              <div>
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" name="code" required />
+              </div>
+            </div>
+          </fieldset>
+          <button type="submit" id="placeOrderBtn" class="btn-place-order">Place Order</button>
+        </form>
+      </section>
     </main>
 
-    <footer>
+    <footer id="main-footer">
       <!-- Footer content will be dynamically generated -->
     </footer>
   </body>

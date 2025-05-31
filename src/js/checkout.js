@@ -1,4 +1,28 @@
-import {loadHeaderFooter} from './utils.js';
+import {loadHeaderFooter, updateCartCount} from './utils.mjs';
+import CheckoutProcess from './CheckoutProcess.mjs';
 
 // Load header and footer
-loadHeaderFooter();
+loadHeaderFooter().then(() => {
+    // Update cart count after header and footer are loaded
+    updateCartCount();
+    });
+
+const outputSelector = document.querySelector('.checkout');
+const key = 'so-cart';
+const checkoutProcess = new CheckoutProcess(key, outputSelector);
+checkoutProcess.init();
+
+const zipCodeInput = document.getElementById('zip');
+if (zipCodeInput) {
+    zipCodeInput.addEventListener('blur', () => {
+        checkoutProcess.calculateOrderTotals();
+    });
+}
+
+const placeOrderBtn = document.getElementById('placeOrderBtn');
+if (placeOrderBtn) {
+    placeOrderBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        checkoutProcess.checkout();
+    });
+}
