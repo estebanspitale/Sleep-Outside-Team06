@@ -18,3 +18,11 @@ if (zipCodeInput) {
         checkoutProcess.calculateOrderTotals();
     });
 }
+
+const placeOrderBtn = document.getElementById('placeOrderBtn');
+if (placeOrderBtn) {
+    placeOrderBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        checkoutProcess.checkout();
+    });
+}

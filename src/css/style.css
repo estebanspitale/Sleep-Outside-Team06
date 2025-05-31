@@ -430,7 +430,8 @@ button {
 }
 
 .checkout button,
-.checkout .btn-place-order {
+.checkout .btn-place-order,
+.btn-clear-cart, .btn-checkout {
   padding: 0.8rem 2rem;
   background: #2e7d32;
   color: #fff;
@@ -478,6 +479,13 @@ footer {
   border-top: 1px solid #ccc;
   text-align: center;
   font-weight: bold;
+}
+
+.cart-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 /*Alerts*/

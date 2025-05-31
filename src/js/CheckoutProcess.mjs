@@ -1,4 +1,26 @@
 import { getLocalStorage } from './utils.mjs';
+import ExternalServices from './ExternalServices.mjs';
+
+const externalServices = new ExternalServices();
+
+// This function prepares the items in the cart to be sent to the server
+function packageItems() {
+    return this.list.map(item => ({
+        id: item.Id,
+        name: item.Name,
+        price: item.FinalPrice,
+        quantity: item.Quantity
+    }));
+}
+
+// This function converts FormData to a JSON object
+function formDataToJSON(formData) {
+    const data = {};
+    for (const [key, value] of formData.entries()) {
+        data[key] = value;
+    }
+    return data;
+}
 
 export default class CheckoutProcess {
     constructor(key, outputSelector) {
@@ -51,5 +73,25 @@ export default class CheckoutProcess {
 
         const totalElement = document.getElementById('order-total');
         if (totalElement) totalElement.innerHTML = `<strong>$${this.orderTotal.toFixed(2)}</strong>`;
+    }
+
+    // This method handles the checkout process
+    async checkout() {
+        const formElement = document.forms['checkoutForm'];
+        const formData = new FormData(formElement);
+        const order = formDataToJSON(formData);
+
+        order.orderDate = new Date().toISOString();
+        order.orderTotal = this.orderTotal.toFixed(2).toString();
+        order.shipping = this.shipping;
+        order.tax = this.tax.toFixed(2).toString();
+        order.items = packageItems.call(this);
+
+        try {
+            const response = await externalServices.checkout(order);
+            console.log('Checkout successful:', response);
+        } catch (error) {
+            console.error('Error during checkout:', error);
+        }
     }
 }

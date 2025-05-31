@@ -89,7 +89,7 @@ export default class ShoppingCart {
       });
     });
 
-    // Mostrar total y footer
+    // Show the clear cart button if there are items in the cart
     this.cartFooter?.classList.remove("hide");
 
     const total = this.cartItems.reduce((sum, item) => {
@@ -100,6 +100,14 @@ export default class ShoppingCart {
 
     if (this.cartTotalElement) {
       this.cartTotalElement.textContent = `Total: $${total.toFixed(2)}`;
+    }
+
+    const checkoutBtn = document.getElementById("checkoutBtn");
+    if (this.cartItems.length > 0 && checkoutBtn) {
+      checkoutBtn.classList.remove("hide");
+      checkoutBtn.addEventListener("click", () => {
+        window.location.href = "/checkout/index.html";
+      });
     }
   }
 

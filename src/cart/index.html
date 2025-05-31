@@ -3,13 +3,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Sleep Outside | Cart</title>
-
     <link rel="stylesheet" href="/css/style.css" />
-
     <script src="../js/cart.js" type="module"></script>
   </head>
 
@@ -28,11 +24,12 @@
 
         <div class="cart-footer hide">
           <p class="cart-total">Total: $<span id="cart-total">0.00</span></p>
+          <div class="cart-actions">
+            <button type="button" id="checkoutBtn" class="btn-checkout hide">Checkout</button>
+            <button type="button" id="clearCartBtn" class="btn-clear-cart">Clear Cart</button>
+          </div>
         </div>
-
-        <button id="clearCartBtn" class="btn-clear-cart">Clear Cart</button>
       </section>
-      <button id="checkoutBtn" class="btn-checkout hide">Checkout</button>
     </main>
 
     <footer id="main-footer">
