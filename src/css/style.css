@@ -222,8 +222,12 @@ button {
 
 /* Start cart list card styles */
 .cart-card {
+  width: 100%;
+  margin: 0.5em auto;
   display: grid;
-  grid-template-columns: 25% auto 15%;
+  justify-content: center;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
   font-size: var(--small-font);
   align-items: center;
 }
@@ -239,6 +243,7 @@ button {
 
 .cart-card .card__name {
   grid-row: 1;
+  font-size: 100%;
   grid-column: 2;
 }
 
@@ -469,8 +474,9 @@ button {
   }
 
   .cart-card {
+    width: 100%;
     font-size: inherit;
-    grid-template-columns: 150px auto 15%;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
