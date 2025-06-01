@@ -267,7 +267,10 @@ button {
 
 .remove-item {
   cursor: pointer;
-  color: red;
+  padding: 0.2rem;
+  border-radius: 5px;
+  color: #fff;
+  background-color: red;
   font-weight: bold;
 }
 
@@ -477,6 +480,10 @@ button {
     width: 100%;
     font-size: inherit;
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .cart-card .card__name {
+    font-size: .75em;
   }
 }
 

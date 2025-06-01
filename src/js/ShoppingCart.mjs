@@ -11,12 +11,12 @@ function cartItemTemplate(item) {
   <a href="#">
     <h2 class="card__name">${item.Name}</h2>
   </a>
-  <p class="cart-card__color">${item.Colors[0].ColorName}</p>
+  <p class="cart-card__color">Color: ${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">
     qty: 
     <input type="number" min="1" value="${item.Quantity}" class="quantity-input" data-id="${item.Id}" style="width:35px; readonly">
     <span class="remove-item" data-id="${item.Id}">X</span></p>
-  <p class="cart-card__price">$${item.FinalPrice}</p>
+  <p class="cart-card__price">Product Price: $${item.FinalPrice}</p>
 </li>`;
 
   return newItem;
@@ -112,41 +112,41 @@ export default class ShoppingCart {
   }
 
   clearCart() {
-      localStorage.removeItem("so-cart");
-      // Update the cart count in the header
-      updateCartCount();
-      this.cartItems = [];
-      // Optionally, refresh the UI after clearing
-      this.renderCartContents();
+    localStorage.removeItem("so-cart");
+    // Update the cart count in the header
+    updateCartCount();
+    this.cartItems = [];
+    // Optionally, refresh the UI after clearing
+    this.renderCartContents();
   }
-  
+
   // Function to remove a product from the cart
   removeProductFromCart(productId) {
-      // const cartItems = getLocalStorage("so-cart") || [];
-      const updatedCart = this.cartItems.filter(item => item.Id !== productId);
-      setLocalStorage("so-cart", updatedCart);
-      // Update the cart count in the header
-      updateCartCount();
-      this.cartItems = updatedCart;
-      // Optionally, refresh the UI after removing the product
-      this.renderCartContents();
+    // const cartItems = getLocalStorage("so-cart") || [];
+    const updatedCart = this.cartItems.filter(item => item.Id !== productId);
+    setLocalStorage("so-cart", updatedCart);
+    // Update the cart count in the header
+    updateCartCount();
+    this.cartItems = updatedCart;
+    // Optionally, refresh the UI after removing the product
+    this.renderCartContents();
   }
 
   // Function to update the quantity of a product in the cart
   updateProductQuantity(productId, newQty) {
-      const updatedCart = this.cartItems.map(item => {
-          if (item.Id === productId) {
-              return { ...item, Quantity: newQty };
-          }
-          return item;
-      });
-      setLocalStorage("so-cart", updatedCart);
-      // Update the cart count in the header
-      updateCartCount(); 
-        // Update the cartItems property with the new cart
-        // This ensures that the cart state is consistent
-      this.cartItems = updatedCart;
-      // Optionally, refresh the UI after updating the quantity
-      this.renderCartContents();
+    const updatedCart = this.cartItems.map(item => {
+      if (item.Id === productId) {
+        return { ...item, Quantity: newQty };
+      }
+      return item;
+    });
+    setLocalStorage("so-cart", updatedCart);
+    // Update the cart count in the header
+    updateCartCount();
+    // Update the cartItems property with the new cart
+    // This ensures that the cart state is consistent
+    this.cartItems = updatedCart;
+    // Optionally, refresh the UI after updating the quantity
+    this.renderCartContents();
   }
 }
