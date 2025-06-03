@@ -103,7 +103,6 @@ export default class CheckoutProcess {
 
             setLocalStorage("so-cart", []);
             location.assign('/checkout/success.html');
-
         } catch (err) {
             removeAllAlerts();
             for (let message in err.message) {
