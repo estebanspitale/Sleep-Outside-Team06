@@ -22,7 +22,7 @@ export function setClick(selector, callback) {
   qs(selector).addEventListener("click", callback);
 }
 
-export function getParam(param){
+export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const product = urlParams.get(param);
@@ -82,4 +82,46 @@ export function updateCartCount() {
     cartCount.textContent = "";
     cartCount.classList.remove("cart-count");
   }
+}
+
+export function alertMessage(messages, type = 'danger', scroll = true) {
+  // Remove existing alerts
+  removeAllAlerts();
+
+  const alert = document.createElement("div");
+  alert.classList.add("alert", type);
+    
+  // Set the contents with message and close button
+  alert.innerHTML = `
+      <div class="alert-message">${messages}</div>
+      <button class="alert-close">&times;</button>
+  `;
+
+  // Add click handler to remove alert when close button is clicked
+  alert.addEventListener('click', function(e) {
+      if (e.target.tagName === 'BUTTON' || e.target.innerText === '×') {
+          this.remove();
+      }
+  });
+
+  // Add the alert to the top of main
+  const main = document.querySelector('main');
+  if (main) {
+      main.prepend(alert);
+      
+      // Auto-remove after 5 seconds
+      setTimeout(() => {
+          alert.remove();
+      }, 5000);
+
+      // Scroll to top if requested
+      if (scroll) {
+          window.scrollTo(0, 0);
+      }
+  }
+}
+
+export function removeAllAlerts() {
+  const alerts = document.querySelectorAll(".alert");
+  alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
 }

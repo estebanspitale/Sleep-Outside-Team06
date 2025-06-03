@@ -1,11 +1,11 @@
-import {loadHeaderFooter, updateCartCount} from './utils.mjs';
+import { loadHeaderFooter, updateCartCount } from './utils.mjs';
 import CheckoutProcess from './CheckoutProcess.mjs';
 
 // Load header and footer
 loadHeaderFooter().then(() => {
     // Update cart count after header and footer are loaded
     updateCartCount();
-    });
+});
 
 const outputSelector = document.querySelector('.checkout');
 const key = 'so-cart';
@@ -19,10 +19,9 @@ if (zipCodeInput) {
     });
 }
 
-const placeOrderBtn = document.getElementById('placeOrderBtn');
-if (placeOrderBtn) {
-    placeOrderBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        checkoutProcess.checkout();
-    });
-}
+document.forms['checkoutForm']
+.addEventListener('submit', (e) => {
+  e.preventDefault();
+  // e.target would contain our form in this case
+   checkoutProcess.checkout();
+});
