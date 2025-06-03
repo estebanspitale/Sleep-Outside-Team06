@@ -1,4 +1,4 @@
-import { getLocalStorage } from './utils.mjs';
+import { getLocalStorage, setLocalStorage, alertMessage, removeAllAlerts } from './utils.mjs';
 import ExternalServices from './ExternalServices.mjs';
 
 const externalServices = new ExternalServices();
@@ -14,7 +14,8 @@ function packageItems() {
 }
 
 // This function converts FormData to a JSON object
-function formDataToJSON(formData) {
+function formDataToJSON(formElement) {
+    const formData = new FormData(formElement);
     const data = {};
     for (const [key, value] of formData.entries()) {
         data[key] = value;
@@ -78,20 +79,37 @@ export default class CheckoutProcess {
     // This method handles the checkout process
     async checkout() {
         const formElement = document.forms['checkoutForm'];
-        const formData = new FormData(formElement);
-        const order = formDataToJSON(formData);
+        if (!formElement) {
+            console.error('Form element not found');
+            return;
+        }
+
+        const order = formDataToJSON(formElement);
+        if (!order) {
+            console.error('Failed to get form data');
+            return;
+        }
 
         order.orderDate = new Date().toISOString();
         order.orderTotal = this.orderTotal.toFixed(2).toString();
         order.shipping = this.shipping;
         order.tax = this.tax.toFixed(2).toString();
         order.items = packageItems.call(this);
+        console.log(order); 
 
         try {
             const response = await externalServices.checkout(order);
             console.log('Checkout successful:', response);
-        } catch (error) {
-            console.error('Error during checkout:', error);
-        }
+
+            setLocalStorage("so-cart", []);
+            location.assign('/checkout/success.html');
+
+        } catch (err) {
+            removeAllAlerts();
+            for (let message in err.message) {
+              alertMessage(err.message[message]);
+            }
+            console.log(err);
+          }
     }
 }
