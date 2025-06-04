@@ -40,37 +40,51 @@
 
         <form name="checkoutForm" id="checkoutForm">
           <div id="error-container" class="error-container hidden"></div>
-          <fieldset>
-            <legend>Shipping</legend>
-            <div class="checkout__name">
-              <label for="fname">First Name</label>
-              <input name="fname" required />
-              <label for="lname">Last Name</label>
-              <input name="lname" required />
-            </div>
+          
+          <fieldset class="form-group fieldset-custom">
+            <legend>Personal Information</legend>
+            <label for="fname">First Name:</label>
+            <input type="text" id="fname" name="fname" required />
+            <label for="lname">Last Name:</label>
+            <input type="text" id="lname" name="lname" required />
+          </fieldset>
 
-            <div class="checkout__address">
-              <label for="street">Street Address</label>
-              <input name="street" required />
-              <label for="city">City</label>
-              <input name="city" required />
-              <label for="state">State</label>
-              <input name="state" required />
-              <label for="zip">Zip Code</label>
-              <input name="zip" id="zip" required />
+          <fieldset class="form-group fieldset-custom">
+            <legend>Shipping & Billing Address</legend>
+            <label for="street">Street Address:</label>
+            <input type="text" id="street" name="street" required />
+            <div class="form-group address-extra">
+              <div>
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city" required />
+              </div>
+              <div>
+                <label for="state">State:</label>
+                <input type="text" id="state" name="state" required />
+              </div>
+              <div>
+                <label for="zip">Zip Code:</label>
+                <input type="text" id="zip" name="zip" required />
+              </div>
             </div>
           </fieldset>
 
-          <fieldset>
-            <legend>Payment</legend>
-            <label for="cardNumber">Credit Card Number</label>
-            <input name="cardNumber" required />
-            <label for="expiration">Expiration Date</label>
-            <input name="expiration" required />
-            <label for="code">Security Code</label>
-            <input name="code" required />
+          <fieldset class="form-group fieldset-custom">
+            <legend>Payment Information</legend>
+            <label for="cardNumber">Credit Card Number:</label>
+            <input type="text" id="cardNumber" name="cardNumber" required />
+            <div class="form-group card-extra">
+              <div>
+                <label for="expiration">Expiration Date:</label>
+                <input type="text" id="expiration" name="expiration" placeholder="MM/YY" required />
+              </div>
+              <div>
+                <label for="code">Security Code:</label>
+                <input type="text" id="code" name="code" required />
+              </div>
+            </div>
           </fieldset>
-
+        
           <button type="submit" id="placeOrderBtn" class="btn-place-order">Place Order</button>
         </form>
       </section>
