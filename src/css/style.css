@@ -705,7 +705,7 @@ footer {
 .alert-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 2px;
   padding: 10px;
   animation: fadeIn 0.8s ease-out;
 }
