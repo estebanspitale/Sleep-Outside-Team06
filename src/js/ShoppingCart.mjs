@@ -12,11 +12,11 @@ function cartItemTemplate(item) {
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">Color: ${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">
-    Qty: 
-    <input type="number" min="1" value="${item.Quantity}" class="quantity-input" data-id="${item.Id}" style="width:35px; readonly">
-    <span class="remove-item" data-id="${item.Id}">X</span></p>
-  <p class="cart-card__price">Product Price: $${item.FinalPrice}</p>
+<p class="cart-card__quantity">
+  Qty: 
+  <input type="number" min="1" value="${item.Quantity}" class="quantity-input" data-id="${item.Id}" style="width:35px;" readonly>
+  <span class="remove-item" data-id="${item.Id}">X</span></p>
+    <p class="cart-card__price">Price: $${item.FinalPrice}</p>
 </li>`;
 
   return newItem;

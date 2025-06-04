@@ -40,7 +40,7 @@
 
         <form name="checkoutForm" id="checkoutForm">
           <div id="error-container" class="error-container hidden"></div>
-          
+
           <fieldset class="form-group fieldset-custom">
             <legend>Personal Information</legend>
             <label for="fname">First Name:</label>
@@ -76,7 +76,13 @@
             <div class="form-group card-extra">
               <div>
                 <label for="expiration">Expiration Date:</label>
-                <input type="text" id="expiration" name="expiration" placeholder="MM/YY" required />
+                <input
+                  type="text"
+                  id="expiration"
+                  name="expiration"
+                  placeholder="MM/YY"
+                  required
+                />
               </div>
               <div>
                 <label for="code">Security Code:</label>
@@ -84,8 +90,10 @@
               </div>
             </div>
           </fieldset>
-        
-          <button type="submit" id="placeOrderBtn" class="btn-place-order">Place Order</button>
+
+          <button type="submit" id="placeOrderBtn" class="btn-place-order">
+            Place Order
+          </button>
         </form>
       </section>
     </main>
